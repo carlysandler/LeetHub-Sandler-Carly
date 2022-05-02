@@ -11,31 +11,22 @@
  * @return {ListNode}
  */
 
-var getCount = function(head){
-    let count = 0;
-    let cur = head;
-    while (cur !== null){
-        cur = cur.next;
-        count++
-    }
-    return count;
-}
+
 var removeNthFromEnd = function(head, n) {
-  
-    nodeBeforeRemovedIndex = getCount(head) - n - 1;
-    cur = head;
-    
-    if (getCount(head) === n){
-        return head.next;
+  // move currentNode n steps into list
+    let fast = head, slow = head;
+    for (let i = 0; i < n; i++){
+        fast = fast.next;
     }
-    for (let i = 0; i < nodeBeforeRemovedIndex; i++){
-        cur = cur.next
+    if (!fast) return head.next
+    
+    // move both pointers until currentNode reaches the end of the list
+    while (fast.next){
+       fast = fast.next;
+        slow = slow.next
         
     }
-    cur.next = cur.next.next;
+    slow.next = slow.next.next;
     return head;
-   
-    
-   
-    
 };
+
