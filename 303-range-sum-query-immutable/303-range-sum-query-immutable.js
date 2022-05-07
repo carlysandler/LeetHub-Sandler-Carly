@@ -1,31 +1,21 @@
 /**
  * @param {number[]} nums
  */
-class NumArray {
-    constructor(nums){
-        this.nums = nums;
+
+var NumArray = function(nums) {
+    this.nums = nums;
+    this.prefixSums = [0];
+    let total = 0;
+    for (let i = 0; i < nums.length; i++) {
+        this.prefixSums.push(total += nums[i]);
     }
-    
-    sumRange(left, right) {
-       let sum = 0;
-        while (left < right + 1) {
-            sum += this.nums[left];
-            left++
-        }
-        return sum;
-        
-    }
-}
+};
 
 /** 
  * @param {number} left 
  * @param {number} right
  * @return {number}
  */
-
-
-/** 
- * Your NumArray object will be instantiated and called as such:
- * var obj = new NumArray(nums)
- * var param_1 = obj.sumRange(left,right)
- */
+NumArray.prototype.sumRange = function(left, right) {
+    return this.prefixSums[right + 1] - this.prefixSums[left];
+};
