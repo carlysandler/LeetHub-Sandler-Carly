@@ -3,13 +3,11 @@
  * @return {number}
  */
 var maxSubArray = function(nums) {
-    let  maxSum = nums[0], windowSum = Math.max(maxSum, 0)
-    for (let windowEnd = 1; windowEnd < nums.length; windowEnd++) {
-        windowSum += nums[windowEnd];
-        maxSum = Math.max(maxSum, windowSum);
-        windowSum = Math.max(windowSum, 0);
-        
+    let prev = -Infinity
+    let max = prev
+    for(let i = nums.length - 1; i >= 0; i--){
+        prev = Math.max(nums[i], nums[i] + prev)
+        max = Math.max(max, prev)
     }
-    return maxSum;
-    
+    return max
 };
